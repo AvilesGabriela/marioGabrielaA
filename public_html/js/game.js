@@ -6,13 +6,15 @@ var game = {
 	data : {
 		// score
 		score : 0
+              
+                
 	},
 	
 	
 	// Run on page load.
 	"onload" : function () {
 	// Initialize the video.
-	if (!me.video.init("screen",  me.video.CANVAS, 480, 320, true, 'auto')) {
+	if (!me.video.init("screen",  me.video.CANVAS, 1067, 600, true, 1.0)) {
 		alert("Your browser does not support HTML5 canvas.");
 		return;
 	}
@@ -32,13 +34,19 @@ var game = {
 
 	// Load the resources.
 	me.loader.preload(game.resources);
+        
 
 	// Initialize melonJS and display a loading screen.
 	me.state.change(me.state.LOADING);
 },
-
+             
+             
 	// Run on game resources loaded.
 	"loaded" : function () {
+            me.pool.register("mario", game.PlayerEntity, true);
+            
+               me.pool.register("levelTrigger", game.levelTrigger);
+            
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
 
